@@ -1,0 +1,34 @@
+// Theme Overrides
+@import './overrides.scss';
+
+// Bootstrap Theme + Icons
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+
+// Custom Mixins
+@mixin icon-custom($src) {
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(#{$src});
+}
+
+// Components Styling
+@import './components/AnotherHeader.scss';
+
+// App Styling
+#app {
+    // color: $dark;
+    // background-color: $light;
+
+    .theme-dark,
+    .theme-dark input {
+        background-color: $dark;
+        color:  $light;
+        border-color: $gray-100;
+    }
+
+
+    
+}

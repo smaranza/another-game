@@ -1,20 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld user="User"/>
-  <h3>Subtitle <i class="bi-play-circle"></i></h3>
+  <AnotherHeader user="User"/>
+  <AnotherCatalogue />
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue'
+  import AnotherHeader from './components/AnotherHeader.vue'
+  import AnotherCatalogue from './components/AnotherCatalogue.vue'
 
   export default {
     name: 'App',
     components: {
-      HelloWorld
+      AnotherHeader,
+      AnotherCatalogue,
     }
   }
 </script>
 
 <style lang="scss">
-  @import './scss/app.scss'; // Import app styling
+  @import './scss/base.scss'; // Import app styling
 </style>

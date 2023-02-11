@@ -1,0 +1,11 @@
+.another--navbar {
+    // height: 2rem;
+    
+    .navbar-brand {
+        color: $success;
+
+        .another--logo {
+            @include icon-custom("/src/assets/logo.png");
+        }
+    }
+}
