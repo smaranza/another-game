@@ -20,16 +20,10 @@
 
 // App Styling
 #app {
-    // color: $dark;
-    // background-color: $light;
-
     .theme-dark,
     .theme-dark input {
         background-color: $dark;
         color:  $light;
         border-color: $gray-100;
     }
-
-
-    
 }

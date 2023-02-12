@@ -12,6 +12,15 @@
     components: {
       AnotherHeader,
       AnotherCatalogue,
+    },
+    provide () {
+      return {
+        // provide API consts to children
+        API: {
+          _BASEURL: process.env.VUE_APP_API_BASEURL,
+          _VERSION: `api-version=${process.env.VUE_APP_API_VERSION}`
+        }
+      }
     }
   }
 </script>

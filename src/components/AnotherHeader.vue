@@ -11,8 +11,8 @@
   </nav>
 </template>
 
-<!-- <script>
+<script>
   export default {
-    name: 'AnotherHeader',
+    name: 'AnotherHeader'
   }
-</script> -->
+</script>
