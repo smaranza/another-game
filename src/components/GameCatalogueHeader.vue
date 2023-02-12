@@ -1,7 +1,7 @@
 <template>
     <header class="d-flex navbar">
         <h1>Games Catalogue</h1>
-        <button class="btn btn-primary"><i class="bi-plus"></i> Add new</button>
+        <button class="btn btn-outline-blue"><i class="bi-plus"></i> Add new</button>
     </header>
 </template>
 

@@ -1,0 +1,62 @@
+.catalogue--container {
+    // &.grid-view {
+    //     .catalogue--header {
+    //         display: none;
+    //     }
+
+    //     .catalogue--body {
+    //         grid-template-columns: 1fr 1fr;
+    //         gap: 1em;
+
+    //         .another--card {
+    //             // margin: 1rem;
+    //             border-radius: $card-border-radius;
+    //             flex-flow: column;
+    //         }
+    //     }
+    // }
+
+    .catalogue--body {
+        // display: grid;
+        // grid-template-columns: 1fr;
+
+        .another--card {
+            @extend .card;
+            border-radius: 0;
+            // width: 100%;
+            // transition: all 120ms;
+            // flex-flow: row;
+            // @extend .another--table;
+        }
+    }
+
+    .another--table {
+        // display: grid;
+        // grid-template-columns: repeat(10, 1fr);
+        // grid-template-areas: "id title title description description description description date tag edit";
+        
+        // .table--id {
+        //     grid-area: id;
+        // }
+        // .table--title {
+        //     grid-area: title;
+        // }
+        // .table--description {
+        //     grid-area: description;
+            
+        // }
+        // .table--date {
+        //     grid-area: date;
+            
+        // }
+        // .table--tag {
+        //     grid-area: tag;
+            
+        // }
+        // .table--edit {
+        //     grid-area: edit;
+            
+        // }
+    }
+
+}

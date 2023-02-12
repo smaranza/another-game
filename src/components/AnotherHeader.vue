@@ -4,7 +4,6 @@
         <i class="d-inline-block another--logo"></i>
         <span>nother-game</span>
       </a>
-      <span class="text-muted">{{ user }}</span>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
@@ -12,11 +11,8 @@
   </nav>
 </template>
 
-<script>
+<!-- <script>
   export default {
     name: 'AnotherHeader',
-    props: {
-      user: String
-    }
   }
-</script>
+</script> -->
