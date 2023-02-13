@@ -15,11 +15,11 @@
   <!-- Game Catalogue  -->
   <div class="catalogue--container position-relative">
     <!-- Catalogue Header -->
-    <div class="catalogue--header row mx-0">
+    <div class="catalogue--header row mx-0 border-dark align-items-center border-top border-bottom">
       <div class="table--id col-1">#</div>
       <div class="table--title col-3">Title</div>
       <div class="table--description col">Description</div>
-      <div class="table--date col-1">Release Date</div>
+      <div class="table--date col-auto">Release Date</div>
       <div class="table--tag col-1">Genre</div>
       <div class="table--edit col-1">Edit</div>
     </div>
@@ -27,23 +27,33 @@
     <!-- Catalogue Body -->
     <ul class="catalogue--body px-0 mx-0 row">
       <GameItem v-for="(item, index) in gameList" :game="item" :key="index"
-        :class="[(view == 'list-mode' ? 'col-12' : 'col-6'), ((index + 1) % 2 == 0 ? 'bg-gray bg-opacity-10' : '')]" />
+        :class="[(view == 'list-mode' ? 'col-12' : 'col-6'), ((index + 1) % 2 == 0 ? 'bg-gray bg-opacity-10' : '')]" 
+        @select-game="setModalGame"/>
     </ul>
   </div>
+
+  <GameModalInfo :content="selectedGame"/>
+  <GameModalEdit :content="selectedGame"/>
 </template>
 
 <script>
   import GameItem from './GameItem.vue';
+  import GameModalInfo from './GameModalInfo.vue';
+  import GameModalEdit from './GameModalEdit.vue';
+  
   export default {
     name: 'GameCatalogueGrid',
     inject: ['API'],
     components: {
-      GameItem
+      GameItem,
+      GameModalInfo,
+      GameModalEdit
     },
     data() {
       return {
         view: "list-mode",
-        gameList: []
+        gameList: [],
+        selectedGame: ''
       }
     },
     mounted() {
@@ -52,7 +62,13 @@
     methods: {
       async fetchAllData() {
         const url = `${this.API._BASEURL}/data/retrieve/all?${this.API._VERSION}`;
-        this.gameList = await (await fetch(url)).json();
+        this.gameList = await (await fetch(url, {
+          "method": "GET"
+        })).json();
+      },
+      setModalGame(gameData) {
+        console.log(gameData);
+        this.selectedGame = gameData;
       }
     }
   }
