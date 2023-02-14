@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <GameCatalogueHeader />
+        <!--  TODO CLEANUP -->
+        <!-- <GameCatalogueHeader /> -->
         <GameCatalogueGrid />
     </div>
 </template>
@@ -12,7 +13,8 @@
   export default {
     name: 'AnotherCatalogue',
     components: {
-        GameCatalogueHeader,
+        // TODO CLEANUP
+        // GameCatalogueHeader,
         GameCatalogueGrid,
     },
     props: {

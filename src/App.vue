@@ -17,8 +17,11 @@
       return {
         // provide API consts to children
         API: {
-          _BASEURL: process.env.VUE_APP_API_BASEURL,
-          _VERSION: `api-version=${process.env.VUE_APP_API_VERSION}`
+          _baseurl: process.env.VUE_APP_API_BASEURL,
+          _version: `api-version=${process.env.VUE_APP_API_VERSION}`,
+          _schema: {
+            'colors' : ['none', 'yellow', 'red', 'green', 'blue']
+          }
         }
       }
     }
