@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'GameModalInfo',
+  name: 'ModalInfo',
   props: {
     content: Object
   }

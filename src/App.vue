@@ -1,6 +1,8 @@
 <template>
   <AnotherHeader user="User"/>
-  <AnotherCatalogue />
+  <div class="container px-0">
+      <AnotherCatalogue />
+  </div>
 </template>
 
 <script>
@@ -19,6 +21,7 @@
         API: {
           _baseurl: process.env.VUE_APP_API_BASEURL,
           _version: `api-version=${process.env.VUE_APP_API_VERSION}`,
+          _gittest: process.env.VUE_APP_GIT_TEST,
           _schema: {
             'colors' : ['None', 'Yellow', 'Red', 'Green', 'Blue', 'Black']
           }

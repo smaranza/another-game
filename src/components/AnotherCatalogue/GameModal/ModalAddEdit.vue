@@ -56,9 +56,13 @@
 
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Are you sure you want to delete <span class="fst-italic fw-bolder">{{gameData.label}}</span>?</h5>
+            <div class="modal-content text-center">
+                <div class="modal-header text-danger vstack">
+                    <i class="bi-exclamation-octagon fs-1"></i> 
+                    <h3 class="">Are you sure?</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to delete <span class="fst-italic fw-bolder">{{gameData.label}}</span>?<br>This action will not be reversible!</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-bs-dismiss="modal" >No, I changed my mind</button>
@@ -71,7 +75,7 @@
 
 <script>
 export default {
-    name: 'GameModalAdd',
+    name: 'ModalAdd',
     inject: ['API'],
     props: {
         content: Object,

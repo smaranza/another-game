@@ -26,4 +26,13 @@
         color:  $light;
         border-color: $gray-100;
     }
+
+
+    .another-card {
+        transition: transform 120ms ease-in-out;
+
+        &:hover {
+            transform: scale(1.01);
+        }
+    }
 }
