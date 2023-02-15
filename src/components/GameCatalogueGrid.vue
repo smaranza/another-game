@@ -40,7 +40,7 @@
   <!-- Modals -->
   <GameModalInfo :content="selectedGame"/>
   <GameModalEdit :content="selectedGame"/>
-  <GameModalAdd />
+  <GameModalAdd :initiator="'create'" @closed-modal="fetchAllData"/>
 </template>
 
 <script>
