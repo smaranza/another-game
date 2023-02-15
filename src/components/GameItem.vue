@@ -9,7 +9,7 @@
     </div>
     <div class="col-auto hstack">
       <i v-if="mode == 'list'" class="btn  bi-info-square" data-bs-toggle="modal" data-bs-target="#infoModal" @click="setModalContent(game)"> </i>
-      <i class="btn bi-pencil-square" data-bs-toggle="modal" data-bs-target="#editModal" @click="setModalContent(game)"></i>
+      <i class="btn bi-pencil-square" data-bs-toggle="modal" data-bs-target="#addModal" @click="setModalContent(game)"></i>
     </div>
   </li>
 </template>

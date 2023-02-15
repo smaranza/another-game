@@ -1,7 +1,7 @@
 <template>
   <header class="d-flex navbar">
       <h1>Games Catalogue</h1>
-      <button class="btn btn-outline-blue" data-bs-toggle="modal" data-bs-target="#addModal"><i class="bi-plus"></i> Add new</button>
+      <button class="btn btn-outline-blue" data-bs-toggle="modal" data-bs-target="#addModal" @click="setModalAddType"><i class="bi-plus"></i> Add new</button>
       
       <!--  Switch List / Grid view -->
       <div class="catalogue--settings d-inline-flex position-relative w-100 justify-content-end mb-2">
@@ -33,21 +33,19 @@
     <ul class="catalogue--body px-0 mx-0 row">
       <GameItem v-for="(item, index) in gameList" :game="item" :key="index" :mode="viewMode"
         :class="[(viewMode == 'list' ? 'col-12' : 'col-6'), ((gameList[item] + 1) % 2 == 0 ? 'bg-gray bg-opacity-10' : '')]" 
-        @select-game="setModalGame"/>
+        @select-game="setModalGameData"/>
     </ul>
   </div>
   
   <!-- Modals -->
   <GameModalInfo :content="selectedGame"/>
-  <GameModalEdit :content="selectedGame"/>
-  <GameModalAdd :initiator="'create'" @closed-modal="fetchAllData"/>
+  <GameModalAddEdit :isEdit="isEdit" @closed-modal="fetchAllData" :content="selectedGame"/>
 </template>
 
 <script>
   import GameItem from './GameItem.vue';
   import GameModalInfo from './GameModalInfo.vue';
-  import GameModalEdit from './GameModalEdit.vue';
-  import GameModalAdd from './GameModalAdd.vue';
+  import GameModalAddEdit from './GameModalAddEdit.vue';
   
   export default {
     name: 'GameCatalogueGrid',
@@ -55,29 +53,37 @@
     components: {
       GameItem,
       GameModalInfo,
-      GameModalEdit,
-      GameModalAdd
+      GameModalAddEdit,
     },
     data() {
       return {
         viewMode: "list",
         gameList: [],
-        selectedGame: ''
+        selectedGame: '',
+        isEdit: false
       }
     },
     mounted() {
       this.fetchAllData()
     },
     methods: {
+      // GET all games
       async fetchAllData() {
         const url = `${this.API._baseurl}/data/retrieve/all?${this.API._version}`;
         this.gameList = await (await fetch(url, {
           "method": "GET"
         })).json();
       },
-      setModalGame(gameData) {
-        console.log(gameData);
+
+      setModalGameData(gameData) {
+        // console.log(gameData);
         this.selectedGame = gameData;
+        this.isEdit = true; 
+      },
+
+      setModalAddType() {
+        this.selectedGame = { color: "None" };
+        this.isEdit = false // is add
       }
     }
   }
