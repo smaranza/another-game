@@ -1,12 +1,14 @@
 <template>
-  <header class="d-flex navbar mt-5">
+  <header class="d-flex flex-md-row flex-column navbar mt-3 mt-md-5">
+    <div class="d-flex flex-md-row flex-column w-100 align-items-center justify-content-between">
       <h1>Games Catalogue</h1>
-      <button class="btn btn-blue" data-bs-toggle="modal" data-bs-target="#addModal" @click="setModalAddType"><i class="bi-plus"></i> Add new</button>
+      <button class="btn btn-blue align-self-center" data-bs-toggle="modal" data-bs-target="#addModal" @click="setModalAddType"><i class="bi-plus"></i> Add new</button>
+    </div>
       
       <!--  Switch List / Grid view -->
-      <div class="catalogue--settings d-inline-flex position-relative w-100 justify-content-between mb-2">
-        <p class="lead mb-0"> This is the description of the archive. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <div class="catalogue--view btn-group" role="group">
+      <div class="catalogue--settings d-flex flex-row w-100 justify-content-center justify-content-md-between my-2">
+        <p class="lead mb-0 d-none d-md-block"> This is the description of the archive. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <div class="catalogue--view btn-group align-self-start" role="group">
           <input type="radio" class="btn-check" name="btnradio" id="list-mode" value="list" autocomplete="off"
             v-model="viewMode">
           <label class="btn btn-light" for="list-mode"><i class="bi-list"></i></label>
@@ -24,9 +26,9 @@
     <div v-if="viewMode == 'list'" class="catalogue--header fw-bold row mx-0 border-dark align-items-center border-top border-bottom py-2">
       <div class="table--id col-1">#</div>
       <div class="table--title col-2">Title</div>
-      <div class="table--description col">Description</div>
-      <div class="table--date col-1">Release Date</div>
-      <div class="table--tag col-1">Genre</div>
+      <div class="table--description col d-none d-md-block ">Description</div>
+      <div class="table--date col-1 d-none d-md-block">Release Date</div>
+      <div class="table--tag col-1 offset-3 offset-md-0">Genre</div>
       <div class="table--edit col-1"></div>
     </div>
 

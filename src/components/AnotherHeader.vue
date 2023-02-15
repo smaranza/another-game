@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar another--navbar theme-dark p-2">
+  <nav class="navbar another--navbar theme-dark p-2 justify-content-center justify-content-md-between">
       <a class="navbar-brand d-flex text-uppercase align-flex-center" href="#">
         <i class="d-inline-block another--logo"></i>
         <span>nother-game</span>

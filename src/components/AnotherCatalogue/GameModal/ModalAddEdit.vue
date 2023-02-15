@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">{{ isEdit ? "Edit Game" : "New Game" }}</h3>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                    <button v-if="isEdit" type="button" class="btn btn-outline-danger d-md-none" data-bs-toggle="modal" data-bs-target="#confirmModal"><i class="bi-trash"></i> Delete Game</button>
                 </div>
                 <div class="modal-body">
                     <form id="entry"
@@ -16,26 +16,26 @@
 
                         <!-- TITLE (label: string)-->
                         <div class="mb-3">
-                            <label for="entry--title" class="col-form-label">Title</label>
+                            <label for="entry--title" class="col-form-label h6">Title</label>
                             <input type="text" name="label" class="form-control" id="entry--title" placeholder="Game title here.." v-model="gameData.label" required>
                         </div>
 
                         <!--  DESCRIPTION (description: string)-->
                         <div class="mb-3">
-                            <label for="entry--desc" class="col-form-label">Description</label>
+                            <label for="entry--desc" class="col-form-label h6">Description</label>
                             <textarea class="form-control" id="entry--desc" name="description"
                                 placeholder="Describe the game here..." v-model="gameData.description"  required></textarea>
                         </div>
                         
                         <!--  RELEASE DATE (date: date) -->
                         <div class="mb-3">
-                            <label for="entry--date" class="col-form-label">Release Date</label>
+                            <label for="entry--date" class="col-form-label h6">Release Date</label>
                             <input type="date" class="form-control" id="entry--date" name="date" v-model="gameData.date" required>
                         </div>
 
                         <!--  COLOR (color: enum)-->
                         <div class="mb-3">
-                            <span>Genre</span>
+                            <h6 class="col-form-label">Genre</h6>
                             <div v-for="(color, index) in colors" class="form-check" :key="index">
                                 <input type="radio" class="form-check-input" name="color" :id="color.toLowerCase()" v-model="gameData.color" :value="color" :checked="color == gameData.color ? true : false" required>
                                 <label :for="color.toLowerCase()" class="form-check-label">{{ color }}</label>
@@ -44,7 +44,7 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button v-if="isEdit" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmModal"><i class="bi-trash"></i> Delete Game</button>
+                    <button v-if="isEdit" type="button" class="btn btn-outline-danger d-none d-md-block" data-bs-toggle="modal" data-bs-target="#confirmModal"><i class="bi-trash"></i> Delete Game</button>
                     <div class="ms-auto">
                         <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal" @click="clearForm">Cancel</button>
                         <button type="submit" form="entry" class="btn btn-primary">{{ isEdit ? "Save Changes" : "Save" }}</button>

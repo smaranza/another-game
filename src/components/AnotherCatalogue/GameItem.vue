@@ -1,23 +1,22 @@
 <template>
-  <!-- LIST view -->
-
   <li v-if="!isGridMode" class="align-items-center row mx-0 border-bottom py-2">
-    <div class="col-1">{{ game.id }}</div>
-    <div class="col-2 text-capitalize">{{ game.label }}</div>
-    <div class="col text-truncate">{{ game.description }}</div>
-    <div class="col-1">{{ releaseDate }}</div>
-    <div class="col-1">
+    <!-- LIST view -->
+    <div class="col-1 fw-bold">{{ game.id }}</div>
+    <div class="col col-md-2 text-capitalize">{{ game.label }}</div>
+    <div class="col d-none d-md-block text-truncate">{{ game.description }}</div>
+    <div class="col-md-1 d-none d-md-block">{{ releaseDate }}</div>
+    <div class="col-auto col-md-1">
       <span class="badge w-auto mx-1" :class="gameColorCls">{{ game.color }}</span>
     </div>
-    <div class="col-1 hstack'">
+    <div class="col-md-1 col-auto hstack'">
       <i class="btn bi-info-square" data-bs-toggle="modal" data-bs-target="#infoModal" @click="setModalContent(game)"> </i>
       <i class="btn bi-pencil-square" data-bs-toggle="modal" data-bs-target="#addModal" @click="setModalContent(game)"></i>
     </div>
   </li>
 
-  <!-- GRID view -->
-  <div v-else class="col-4 py-3">
-    <div class="card h-100 shadow another-card ">
+  <div v-else class="col-12 col-lg-4 col-md-6 pb-3">
+    <!-- GRID view -->
+    <div class="card h-100 shadow another-card">
       <div class="card-header hstack align-items-end">
         <h3 class="card-title my-2 text-capitalize">{{ game.label }} <small class="text-muted fs-6 fst-italic">#{{ game.id }}</small></h3>
         <i class="btn bi-pencil-square ms-auto fs-5 text-muted" data-bs-toggle="modal" data-bs-target="#addModal" @click="setModalContent(game)"></i>
