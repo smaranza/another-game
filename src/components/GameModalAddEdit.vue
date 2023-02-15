@@ -44,11 +44,25 @@
                     </form>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button v-if="isEdit" type="submit" class="btn btn-outline-danger"><i class="bi-trash"></i> Delete Game</button>
+                    <button v-if="isEdit" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmModal"><i class="bi-trash"></i> Delete Game</button>
                     <div class="ms-auto">
                         <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal" @click="clearForm">Cancel</button>
-                        <button type="submit" form="entry" class="btn btn-primary ml-2">{{ isEdit ? "Save Changes" : "Save" }}</button>
+                        <button type="submit" form="entry" class="btn btn-primary">{{ isEdit ? "Save Changes" : "Save" }}</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Are you sure you want to delete <span class="fst-italic fw-bolder">{{gameData.label}}</span>?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal" >No, I changed my mind</button>
+                    <button type="button" class="btn btn-danger" @click="deleteData">Yes, please</button>
                 </div>
             </div>
         </div>
@@ -116,6 +130,13 @@ export default {
         updateData(e) {
             this.gameData.id = this.content.id;
             this.sendAPIRequest('PUT', '/data/update?', this.gameData);
+        },
+
+        // DELETE delete game
+        deleteData(e) {
+            this.gameData.id = this.content.id;
+            this.sendAPIRequest('DELETE', `/data/delete/${this.gameData.id}?`);
+            this.closeModal('#confirmModal')
         },
 
         // validation on form to prevent submit
