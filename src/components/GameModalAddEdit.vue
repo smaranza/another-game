@@ -37,7 +37,7 @@
                         <div class="mb-3">
                             <span>Genre</span>
                             <div v-for="(color, index) in colors" class="form-check" :key="index">
-                                <input type="radio" class="form-check-input" name="color" :id="color.toLowerCase()" v-model="gameData.color" :checked=" color == gameData.color" required>
+                                <input type="radio" class="form-check-input" name="color" :id="color.toLowerCase()" v-model="gameData.color" :value="color" :checked="color == gameData.color ? true : false" required>
                                 <label :for="color.toLowerCase()" class="form-check-label">{{ color }}</label>
                             </div>
                         </div>
@@ -72,7 +72,6 @@ export default {
     },
     created() {
         this.colors = this.API._schema.colors;
-        this.dateValue = this.formatDateValue()
     },
     computed: {
         gameData() {
@@ -109,43 +108,14 @@ export default {
         },
 
         // POST new game
-        async createData(e) {
-            const requestOptions = {
-                method: "POST",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.gameData)
-            };
-
-            await fetch(
-                `${this.API._baseurl}/data/create?${this.API._version}`,
-                requestOptions
-            ).then(response => {
-                if (response.ok) {
-                    this.closeModal('#addModal')
-                }
-            });
+        createData(e) {
+            this.sendAPIRequest('POST', '/data/create?', this.gameData);
         },
 
         // PUT update game
-        async updateData(e) {
+        updateData(e) {
             this.gameData.id = this.content.id;
-
-            console.log(this.gameData);
-
-            const requestOptions = {
-                method: "PUT",
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.gameData)
-            };
-
-            // await fetch(
-            //     `${this.API._baseurl}/data/update?${this.API._version}`,
-            //     requestOptions
-            // ).then(response => {
-            //     if (response.ok) {
-            //         this.closeModal('#addModal')
-            //     }
-            // });
+            this.sendAPIRequest('PUT', '/data/update?', this.gameData);
         },
 
         // validation on form to prevent submit
@@ -180,15 +150,23 @@ export default {
             this.$emit('closed-modal'); //trigger table update on parent component
         },
 
-        formatDateValue() {
-            this.dateValue = this.content.date;
+        async sendAPIRequest(method, url, data) {
+            const requestOptions = {
+                method: method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            };
 
-            if (this.content.date !== undefined) {
-                console.log(this.content.date);
-                this.dateValue = this.content.date.replace('/', '-')
-            }
-            return this.dateValue
+            await fetch(
+                `${this.API._baseurl}${url}${this.API._version}`,
+                requestOptions
+            ).then(response => {
+                if (response.ok) {
+                    this.closeModal('#addModal')
+                }
+            });
         }
+
     }
 }
 </script>

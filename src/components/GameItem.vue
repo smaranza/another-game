@@ -21,10 +21,12 @@
       game: Object,
       mode: String
     },
-    data(){
-      return {
-        releaseDate : this.formatDate(this.game.date),
-        gameColorCls : `bg-${this.game.color.toLowerCase()}`
+    computed: {
+      gameColorCls() {
+        return`bg-${this.game.color.toLowerCase()}`
+      },
+      releaseDate() {
+        return this.formatDate(this.game.date)
       }
     },
     methods: {

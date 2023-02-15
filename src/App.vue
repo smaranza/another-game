@@ -20,7 +20,7 @@
           _baseurl: process.env.VUE_APP_API_BASEURL,
           _version: `api-version=${process.env.VUE_APP_API_VERSION}`,
           _schema: {
-            'colors' : ['None', 'Yellow', 'Red', 'Green', 'Blue']
+            'colors' : ['None', 'Yellow', 'Red', 'Green', 'Blue', 'Black']
           }
         }
       }
