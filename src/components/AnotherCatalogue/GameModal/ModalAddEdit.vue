@@ -183,7 +183,7 @@ export default {
             };
 
             await fetch(
-                `${this.API._baseurl}${url}${this.API._version}`,
+                `${this.API._BASEURL}${url}${this.API._VERSION}`,
                 requestOptions
             ).then(response => {
                 if (response.ok) {

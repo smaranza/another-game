@@ -41,7 +41,7 @@
   </div>
   
   <!-- Modals -->
-  <ModalInfo :content="selectedGame"/>
+  <ModalInfo id="infoModal" :content="selectedGame"/>
   <ModalAddEdit :isEdit="isEdit" @closed-modal="fetchAllData" :content="selectedGame"/>
 </template>
 
@@ -66,20 +66,24 @@
         isEdit: false
       }
     },
-    mounted() {
+
+    created() {
       this.fetchAllData()
     },
+
     methods: {
       // GET all games
       async fetchAllData() {
-        const url = `${this.API._baseurl}/data/retrieve/all?${this.API._version}`;
+        const url = `${this.API._BASEURL}/data/retrieve/all?${this.API._VERSION}`;
         this.gameList = await (await fetch(url, {
           "method": "GET"
         })).json();
+
+        // emit full game list to be used by search
+        this.$emit('listUpdate', this.gameList);
       },
 
       setModalGameData(gameData) {
-        // console.log(gameData);
         this.selectedGame = gameData;
         this.isEdit = true; 
       },
