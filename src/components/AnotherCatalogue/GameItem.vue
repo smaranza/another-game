@@ -51,15 +51,16 @@
       }
     },
     methods: {
-      formatDate(stringData) {
-        return new Date(stringData).toLocaleDateString(undefined, {
+      // #SM: export function to utils
+      formatDate(stringDate) { 
+        return new Date(stringDate).toLocaleDateString(undefined, {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric'
         });
       },
+
       setModalContent(thisGame) {
-        thisGame.date = this.releaseDate;
         thisGame.gameColorCls = this.gameColorCls;
         this.$emit('select-game', thisGame);
       }

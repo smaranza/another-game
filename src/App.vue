@@ -62,9 +62,9 @@ export default {
     }
   },
 
-  created() {
-    this.authorizeRequests(process.env.VUE_APP_API_CLIENT_ID, process.env.VUE_APP_API_CLIENT_SECRET);
+  mounted() { // #SM: change to mounted
     // if (this.API._VERSION == 2) {
+      this.authorizeRequests(process.env.VUE_APP_API_CLIENT_ID, process.env.VUE_APP_API_CLIENT_SECRET);
     // }
   },
 }

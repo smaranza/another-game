@@ -30,7 +30,7 @@
                         <!--  RELEASE DATE (date: date) -->
                         <div class="mb-3">
                             <label for="entry--date" class="col-form-label h6">Release Date</label>
-                            <input type="date" class="form-control" id="entry--date" name="date" v-model="gameData.date" required>
+                            <input type="datetime-local" class="form-control" id="entry--date" name="date" v-model="gameData.date" required>
                         </div>
 
                         <!--  COLOR (color: enum)-->
@@ -46,7 +46,8 @@
                 <div class="modal-footer justify-content-between">
                     <button v-if="isEdit" type="button" class="btn btn-outline-danger d-none d-md-block" data-bs-toggle="modal" data-bs-target="#confirmModal"><i class="bi-trash"></i> Delete Game</button>
                     <div class="ms-auto">
-                        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal" @click="clearForm">Cancel</button>
+                        <!-- #SM: IF isEdit DO NOT clearFrom on cancel -->
+                        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal" @click="isEdit ? '' : clearForm">Cancel</button>
                         <button type="submit" form="entry" class="btn btn-primary">{{ isEdit ? "Save Changes" : "Save" }}</button>
                     </div>
                 </div>
@@ -62,7 +63,7 @@
                     <h3 class="">Are you sure?</h3>
                 </div>
                 <div class="modal-body">
-                    <p>Do you want to delete <span class="fst-italic fw-bolder">{{gameData.label}}</span>?<br>This action will not be reversible!</p>
+                    <p>Do you want to delete <span class="fst-italic fw-bolder">{{ gameData.label }}</span>?<br>This action will not be reversible!</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-link" data-bs-dismiss="modal" >No, I changed my mind</button>
@@ -84,32 +85,37 @@ export default {
     date() {
         return {
             colors: [],
-            dateValue: ''
+            // dateValue: ''
             // gameData: {},
         }
     },
-    created() {
+    mounted() {
         this.colors = this.API._schema.colors;
     },
+
     computed: {
         gameData() {
             // format date as valid <input type="date"> value
-            let dateValue = this.content.date;
-            if (this.content.date !== undefined) {
-                let dataSplit = this.content.date.split('/');
-                dataSplit.reverse();
-                dateValue = dataSplit.join('-');
-            }
+            // let dateValue = this.content.date;
+
+            // if (this.content.date !== undefined) {
+            //     let dataSplit = this.content.date.split('/');
+            //     dataSplit.reverse();
+            //     dateValue = dataSplit.join('-');
+            // }
+            // console.log(dateValue);
+            // this.dateValue = ;
 
             //return game data
             return {
                 label: this.content.label,
                 description: this.content.description,
-                date: dateValue,
+                date: this.content.date,
                 color: this.content.color || 'None'
             }
         }
     },
+
     methods: {
         // handle request POST / update
         dataRequest(e) {

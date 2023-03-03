@@ -11,7 +11,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <span class="badge" :class="content.gameColorCls">{{ content.color }}</span>
-          <div class=""><span class="fw-bold">Release Date:</span> {{ content.date }}</div>
+          <div class=""><span class="fw-bold">Release Date:</span> {{ releaseDate }}</div>
         </div>
       </div>
     </div>
@@ -23,6 +23,22 @@ export default {
   name: 'ModalInfo',
   props: {
     content: Object
+  },
+
+  methods: {
+    formatDate(stringDate) {
+      return new Date(stringDate).toLocaleDateString(undefined, {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    }
+  },
+
+  computed: {
+    releaseDate() {
+      return this.formatDate(this.content.date)
+    }
   }
 }
 </script>
