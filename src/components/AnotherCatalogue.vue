@@ -34,7 +34,7 @@
 
     <!-- Catalogue Body -->
     <ul class="catalogue--body px-0 mx-0 row">
-      <GameItem v-for="(item, index) in gameList" :game="item" :key="index" :mode="viewMode"
+      <GameItem v-for="(item, index) in gameResults" :game="item" :key="index" :mode="viewMode"
         :class="[((index + 1) % 2 == 0 && viewMode == 'list' ? 'bg-gray bg-opacity-10' : '')]" 
         @select-game="setModalGameData"/>
     </ul>
@@ -67,20 +67,27 @@
       }
     },
 
-    created() {
-      this.fetchAllData()
+    mounted() {
+      this.gameList = this.fetchAllData()
+    },
+
+    computed: {
+      gameResults() {
+        return this.gameList
+      }
     },
 
     methods: {
       // GET all games
       async fetchAllData() {
         const url = `${this.API._BASEURL}/data/retrieve/all?${this.API._VERSION}`;
-        this.gameList = await (await fetch(url, {
+        let allData = await (await fetch(url, {
           "method": "GET"
         })).json();
 
         // emit full game list to be used by search
-        this.$emit('listUpdate', this.gameList);
+        this.$emit('listUpdate', allData);
+        this.gameList = allData
       },
 
       setModalGameData(gameData) {

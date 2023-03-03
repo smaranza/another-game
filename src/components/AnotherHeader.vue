@@ -6,9 +6,11 @@
       </a>
       <form class="d-flex" role="search" id="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" @submit="searchData">Search</button>
+        <button class="btn btn-outline-success" @click="searchData">Search</button>
       </form>
   </nav>
+
+  <div>{{ searchResultList }}</div>
 </template>
 
 <script>
@@ -17,10 +19,18 @@
     props: {
       list: Object
     },
+
     inject: ['API'],
+
     data() {
       return {
         resultList: []
+      }
+    },
+
+    computed: {
+        searchResultList() {
+          return this.resultList
       }
     },
 
@@ -47,16 +57,28 @@
         
         for (let i = 0; i < matchedArray.length; i++) {
           const searchResultId = matchedArray[i];
-          this.resultList[i] = this.fetchSingleData(searchResultId);
+          this.fetchSingleData(i, searchResultId);
         }
       },
 
       // WIP logs single games SEARCH RESULTS => ONLU FOR API CALL DEMO
-      async fetchSingleData(id) {
-        const url = `${this.API._BASEURL}/data/retrieve/${id}?${this.API._VERSION}`;
-        console.log('SEARCH RESULT: ', await (await fetch(url, {
-          "method": "GET"
-        })).json())
+      async fetchSingleData(i, id) {
+        
+        if (id == undefined) {
+          console.log('NO REULTS FOUND')
+        } else {
+          const url = `${this.API._BASEURL}/data/retrieve/${id}?${this.API._VERSION}`;
+          let singleResult = await (await fetch(url, {
+              "method": "GET"
+            })).json().then(data => {return data})
+
+          console.log(singleResult)
+
+          this.resultList.push(singleResult);
+        }
+
+        // TO DO: update gamelist with search results
+        this.$emit('searchList', this.resultList)
       }
 
     }
