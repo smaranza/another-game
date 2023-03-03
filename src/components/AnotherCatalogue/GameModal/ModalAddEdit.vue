@@ -12,8 +12,6 @@
                           novalidate
                           @submit="dataRequest"
                     >
-                        <!-- <input v-if="isEdit" type="hidden" name="id" :value="content.id"> -->
-
                         <!-- TITLE (label: string)-->
                         <div class="mb-3">
                             <label for="entry--title" class="col-form-label h6">Title</label>
@@ -38,7 +36,7 @@
                             <h6 class="col-form-label">Genre</h6>
                             <div v-for="(color, index) in colors" class="form-check" :key="index">
                                 <input type="radio" class="form-check-input" name="color" :id="color.toLowerCase()" v-model="gameData.color" :value="color" :checked="color == gameData.color ? true : false" required>
-                                <label :for="color.toLowerCase()" class="form-check-label">{{ color }}</label>
+                                <label :for="color.toLowerCase()" class="form-check-label">{{ genres[color] }}</label>
                             </div>
                         </div>
                     </form>
@@ -77,7 +75,7 @@
 <script>
 export default {
     name: 'ModalAdd',
-    inject: ['API'],
+    inject: ['API', 'genres'],
     props: {
         content: Object,
         isEdit: Boolean
@@ -197,7 +195,6 @@ export default {
                 }
             });
         }
-
     }
 }
 </script>

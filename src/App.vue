@@ -27,13 +27,21 @@ export default {
         _schema: {
           'colors': ['None', 'Yellow', 'Red', 'Green', 'Blue', 'Black']
         }
-      },
+      }
     }
   },
 
   provide() {
     return {
-      API: this.API
+      API: this.API,
+      genres: {
+        'None': 'None',
+        'Yellow': 'Platform',
+        'Red': 'Simulator',
+        'Green': 'Open World',
+        'Blue': 'Adventure',
+        'Black': 'Horror'
+      }
     }
   },
 
@@ -62,7 +70,7 @@ export default {
     }
   },
 
-  mounted() { // #SM: change to mounted
+  mounted() {
     // if (this.API._VERSION == 2) {
       this.authorizeRequests(process.env.VUE_APP_API_CLIENT_ID, process.env.VUE_APP_API_CLIENT_SECRET);
     // }

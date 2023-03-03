@@ -10,7 +10,7 @@
           <p class="">{{ content.description }}</p>
         </div>
         <div class="modal-footer justify-content-between">
-          <span class="badge" :class="content.gameColorCls">{{ content.color }}</span>
+          <span class="badge" :class="content.gameColorCls">{{ genres[content.color] }}</span>
           <div class=""><span class="fw-bold">Release Date:</span> {{ releaseDate }}</div>
         </div>
       </div>
@@ -24,6 +24,8 @@ export default {
   props: {
     content: Object
   },
+  
+  inject: ['genres'],
 
   methods: {
     formatDate(stringDate) {

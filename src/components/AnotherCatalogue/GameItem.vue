@@ -6,7 +6,7 @@
     <div class="col d-none d-md-block text-truncate">{{ game.description }}</div>
     <div class="col-md-1 d-none d-md-block">{{ releaseDate }}</div>
     <div class="col-auto col-md-1">
-      <span class="badge w-auto mx-1" :class="gameColorCls">{{ game.color }}</span>
+      <span class="badge w-auto mx-1" :class="gameColorCls">{{ genres[game.color] }}</span>
     </div>
     <div class="col-md-1 col-auto hstack'">
       <i class="btn bi-info-square" data-bs-toggle="modal" data-bs-target="#infoModal" @click="setModalContent(game)"> </i>
@@ -25,7 +25,7 @@
         <p>{{ game.description }}</p>
       </div>
       <div class="card-footer hstack justify-content-between py-3">
-        <div class="badge w-auto mx-1" :class="gameColorCls">{{ game.color }}</div>
+        <div class="badge w-auto mx-1" :class="gameColorCls">{{ game.genre }}</div>
         <div>Released on: <span class="font-monospace">{{ releaseDate }}</span></div>
       </div>
     </div>
@@ -37,8 +37,11 @@
     name: 'GameItem',
     props: {
       game: Object,
-      mode: String
+      mode: String,
     },
+
+    inject: ['genres'],
+    
     computed: {
       gameColorCls() {
         return`bg-${this.game.color.toLowerCase()}`
@@ -50,6 +53,7 @@
         return this.mode == 'grid'
       }
     },
+
     methods: {
       // #SM: export function to utils
       formatDate(stringDate) { 
